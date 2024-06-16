@@ -33,10 +33,7 @@ void	mark_square_invalid(int row, int col, char board[][SIZE])
 	j = col;
 	i = row + 1;
 	while (i < SIZE)
-	{
-		board[i][j] = INVALID;
-		i++;
-	}
+		board[i++][j] = INVALID;
 	i = row + 1;
 	j = col + 1;
 	while (i < SIZE && j < SIZE)
@@ -122,11 +119,11 @@ int	ft_ten_queens_puzzle(void)
 	return (j);
 }
 
-/*int	main(void)
+int	main(void)
 {
 	int	result;
 
 	result = ft_ten_queens_puzzle();
 	printf("Total solutions: %d\n", result);
 	return (0);
-}*/
+}
