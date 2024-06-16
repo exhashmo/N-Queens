@@ -1,4 +1,5 @@
 // Online C compiler to run C program online
+// Online C compiler to run C program online
 #include <stdio.h>
 
 #define SIZE 10
@@ -70,28 +71,31 @@ void	print(char board[][SIZE])
 	printf("\n");
 }
 
-void	place_queen(char board[][SIZE], int row, int col, int *t)
+void	place_queen(char board[][SIZE], int row, int *t)
 {
 	int		i;
 	char	board_cp[SIZE][SIZE];
 
 	i = 0;
 	copy_board(board_cp, board);
-	board_cp[row][col] = QUEEN;
-	mark_square_invalid(row, col, board_cp);
-	row++;
 	while (i < SIZE)
 	{
+	    
 		if (board_cp[row][i] == EMPTY && row != SIZE - 1)
 		{
-			place_queen(board_cp, row, i, t);
+		  
+			board_cp[row][i] = QUEEN;
+			mark_square_invalid(row, i, board_cp);
+			place_queen(board_cp, row + 1, t);
+			copy_board(board_cp, board);
 		}
 		else if (board_cp[row][i] == EMPTY && row == SIZE - 1)
 		{
+		
 			board_cp[row][i] = QUEEN;
 			print(board_cp);
 			*t = *t + 1;
-			break ;
+			break;
 		}
 		i++;
 	}
@@ -114,12 +118,11 @@ int	ft_ten_queens_puzzle(void)
 	}
 	i = 0;
 	j = 0;
-	while (i < SIZE)
-		place_queen(board, 0, i++, &j);
+	place_queen(board, 0, &j);
 	return (j);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int	result;
 
@@ -127,3 +130,4 @@ int	main(void)
 	printf("Total solutions: %d\n", result);
 	return (0);
 }
+*/
